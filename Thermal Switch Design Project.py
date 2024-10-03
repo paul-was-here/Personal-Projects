@@ -1,10 +1,11 @@
+# Code for plotting dimensions function for engr135 thermal switch design project
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import math
 from collections import OrderedDict
 
-#Numerical Values
+#Constant values
 pi = math.pi
 dT = 85
 Ea = 10000
@@ -15,10 +16,12 @@ ts = 1/16
 ws = 1/8
 L = 4
 
-ta = np.linspace(0.0000001,0.15,2000)
+#Functions and variables
+ta = np.linspace(0.04,0.05,500)
 wa = (dT*(alphaa-alphas)-(pi**2)*(ta**2)/3/(L**2))*((6*(L**2)*Es*ts*ws)/((pi**2)*Ea*(ta**3)))
 ylim = ta
 
+#Plotting
 plt.plot(ta,wa, label="wₐ(tₐ)")
 plt.plot(ta,ylim, label="wₐ > tₐ")
 ax = plt.gca()
