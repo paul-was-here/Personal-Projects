@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import math
 from collections import OrderedDict
 
-#Constant values
+#Constant values:
 pi = math.pi
 dT = 85
 Ea = 10000
@@ -16,29 +16,32 @@ ts = 1/16
 ws = 1/8
 L = 4
 
-#Functions and variables
-ta = np.linspace(0.04,0.05,500)
-wa = (dT*(alphaa-alphas)-(pi**2)*(ta**2)/3/(L**2))*((6*(L**2)*Es*ts*ws)/((pi**2)*Ea*(ta**3)))
-ylim = ta
+#Functions:
+def allValues():
+    x = np.linspace(0.04,0.05,500)
+    y = (dT*(alphaa-alphas)-(pi**2)*(x**2)/3/(L**2))*((6*(L**2)*Es*ts*ws)/((pi**2)*Ea*(x**3)))
+    y2 = x
+    return(x,y,y2)
+def plotting(x,y,y2):
+    plt.plot(x,y,label="wₐ(tₐ)")
+    plt.plot(x,y2,label="wₐ > tₐ")
+    ax = plt.gca()
+    ax.set_ylim(0,0.7)
+    ax.set_xlim(0.04,0.05)
+    ax.set_ylabel("wₐ (in)")
+    ax.set_xlabel("tₐ (in)")
+    ax.fill_between(y,y2,100,interpolate='True',color='Orange',alpha=0.1)
+    ax.legend()
+    plt.show()
 
-#Plotting
-plt.plot(ta,wa, label="wₐ(tₐ)")
-plt.plot(ta,ylim, label="wₐ > tₐ")
-ax = plt.gca()
-ax.set_ylim(0,0.7)
-ax.set_xlim(0.04,0.05)
-ax.set_ylabel("wₐ (in)")
-ax.set_xlabel("tₐ (in)")
-ax.fill_between(ta, ylim, 100, interpolate='True',color='Orange', alpha=0.1)
-ax.legend()
-
-plt.show()
+#Main:
+ta,wa,ylim = allValues()
+plotting(ta,wa,ylim)
 
 
+
+# Break at UNUSED CODE:
 exit()
-
-
-#UNUSED CODE:
 
 coords = list(zip(wa,ta))
 
